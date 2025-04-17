@@ -1,0 +1,865 @@
+/* Fonts */
+@font-face {
+    font-family: "Noto-Sans-Variable";
+    src: url("../fonts/NotoSans-Italic-VariableFont_wdth\,wght.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto-Sans-Italic";
+    src: url("../fonts/NotoSans-Italic-VariableFont_wdth\,wght.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto-Sans-Bold";
+    src: url("../fonts/static/NotoSans-Bold.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto-Sans-Medium";
+    src: url("../fonts/static/NotoSans-Medium.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Noto-Sans-Regular";
+    src: url("../fonts/static/NotoSans-Regular.ttf") format("truetype");
+    font-display: swap;
+}
+
+:root{
+    /* Fonts */
+    --main-font: "Noto-Sans-Regular", sans-serif;
+    --italic-font: "Noto-Sans-Italic", sans-serif;
+    --bold-font: "Noto-Sans-Bold", sans-serif;
+    --medium-font: "Noto-Sans-Medium", sans-serif;
+    --regular-font: "Noto-Sans-Regular", sans-serif;
+    
+    /* Gradients */
+    --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
+    --light-gradient: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+    
+    /* Dark theme colors (default) */
+    --background-gradient: var(--dark-gradient);
+    --card-background: hsl(226, 25%, 17%);
+    --card-border: hsl(226, 11%, 37%);
+    --text-primary: white;
+    --text-secondary: hsl(0, 0%, 78%);
+    --nav-background: hsl(226, 25%, 17%);
+    --button-background: hsl(225, 23%, 24%);
+    --button-hover: hsl(226, 11%, 37%);
+    --button-active: hsl(3, 71%, 56%);
+    --button-border: hsl(226, 11%, 37%);
+    
+    /* Red colors */
+    --red-400: hsl(3, 86%, 64%);
+    --red-500: hsl(3, 71%, 56%);
+    --red-700: hsl(3, 77%, 44%);
+    --logo-red: #C7231A;
+    
+    /* Neutral colors */
+    --neutral-900: hsl(227, 75%, 14%);
+    --neutral-800: hsl(226, 25%, 17%);
+    --neutral-700: hsl(225, 23%, 24%);
+    --neutral-600: hsl(226, 11%, 37%);
+    --neutral-300: hsl(0, 0%, 78%);
+    --neutral-200: hsl(217, 61%, 90%);
+    --neutral-100: hsl(0, 0%, 93%);
+    --neutral-0: hsl(200, 60%, 99%);
+
+    /* Transitions */
+    --theme-transition: background 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Common sizes */
+    --border-radius-lg: 20px;
+    --border-radius-md: 10px;
+    --border-radius-sm: 5px;
+    
+    /* Z-indices */
+    --z-index-base: 1;
+    --z-index-hover: 2;
+    --z-index-active: 3;
+}
+
+/* Светлая тема */
+.light-theme {
+    --background-gradient: var(--light-gradient);
+    --card-background: var(--neutral-0);
+    --card-border: var(--neutral-200);
+    --text-primary: var(--neutral-900);
+    --text-secondary: var(--neutral-600);
+    --nav-background: white; /* Чисто белый фон для навигации */
+    --button-background: var(--neutral-200);
+    --button-hover: var(--neutral-300);
+    --button-active: var(--red-500);
+    --button-border: var(--neutral-300);
+}
+
+/* Main settings */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    font-family: var(--main-font);
+    background: var(--background-gradient);
+    color: var(--text-primary);
+    transition: var(--theme-transition);
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    height: 90%;
+}
+.navigation-bar{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 85px;
+    min-height: 70px;
+    background: var(--nav-background);
+    padding: 12px 20px;
+    justify-content: space-between;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    transition: var(--theme-transition);
+}
+.extension-logo-block{
+    position: relative;
+    width: 20%;
+    min-width: 180px;
+    max-width: 220px;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    width: 100%;
+    height: auto;
+    max-height: 50px;
+    min-height: 35px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+/* Стили для элементов логотипа */
+.logo-icon {
+    fill: #C7231A; /* Цвет иконки - всегда красный */
+}
+
+.logo-text {
+    fill: white; /* Цвет текста по умолчанию - белый */
+    transition: fill 0.3s ease;
+}
+
+/* Светлая тема - меняем только цвет текста логотипа */
+.light-theme .logo-text {
+    fill: var(--neutral-900); /* В светлой теме текст темный */
+}
+
+/* Базовые стили для кнопки смены темы (темная тема) */
+.theme-block {
+    width: 55px;
+    height: 55px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 10px;
+    background: hsl(225, 23%, 24%); /* Фиксированное значение для темной темы */
+    margin-left: 20px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+}
+
+.theme-icon-path {
+    stroke: white; /* Фиксированное значение для темной темы */
+    transition: stroke 0.3s ease;
+}
+
+/* Стили для кнопки смены темы в светлой теме */
+.light-theme .theme-block {
+    background: hsl(217, 61%, 90%); /* Фиксированное значение для светлой темы */
+}
+
+.light-theme .theme-icon-path {
+    stroke: hsl(226, 25%, 17%); /* Фиксированное значение для светлой темы */
+}
+
+/* Анимация переключения темы */
+.theme-block.theme-toggle-active {
+    animation: theme-toggle-pulse 0.5s ease-out;
+}
+
+@keyframes theme-toggle-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+.light-theme .theme-block.theme-toggle-active {
+    animation: theme-toggle-pulse-light 0.5s ease-out;
+}
+
+@keyframes theme-toggle-pulse-light {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.4);
+    }
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 10px rgba(50, 50, 50, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(50, 50, 50, 0);
+    }
+}
+
+.theme-icon {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.5s ease;
+}
+
+/* Эффект наведения для кнопки темы */
+.theme-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Эффект при наведении в темной теме */
+.theme-block:hover {
+    background-color: hsl(226, 11%, 37%);
+}
+
+/* Эффект при наведении в светлой теме */
+.light-theme .theme-block:hover {
+    background-color: hsl(0, 0%, 78%);
+}
+
+.theme-block:hover .theme-icon {
+    transform: rotate(45deg);
+}
+
+/* Цвет иконки при наведении для темной темы */
+.theme-block:hover .theme-icon-path {
+    stroke: #C7231A; /* Фиксированное значение для красного цвета логотипа */
+}
+
+/* Цвет иконки при наведении для светлой темы */
+.light-theme .theme-block:hover .theme-icon-path {
+    stroke: #C7231A; /* Фиксированное значение для красного цвета логотипа */
+}
+
+/* Добавляем эффект волны при клике */
+.theme-block::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.theme-toggle-active::after {
+    opacity: 1;
+    transform: scale(2);
+}
+
+/* Медиа-запрос для больших экранов (1920px и выше) */
+@media screen and (min-width: 1920px) {
+    .navigation-bar {
+        height: 60px;
+        min-height: 60px;
+        max-height: 60px;
+        padding: 12px 20px;
+    }
+    .extension-logo-block {
+        min-width: 160px;
+        max-width: 180px;
+        width: 12%;
+    }
+    .logo {
+        max-height: 40px;
+        min-height: 30px;
+    }
+    .theme-block {
+        width: 45px;
+        height: 45px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    .theme-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    /* Карточки на весь экран */
+    .extension-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        width: 100%;
+        /* Убираем max-width и margin */
+    }
+    
+    .extension-card {
+        padding: 30px;
+        min-height: 180px;
+    }
+}
+
+/* Медиа-запросы с пропорциональным масштабированием */
+@media screen and (max-width: 1200px) {
+    .navigation-bar {
+        height: 65px;
+        min-height: 65px;
+        max-height: 65px;
+        padding: 12px 20px !important;
+    }
+    .extension-logo-block {
+        min-width: 160px;
+        max-width: 200px;
+    }
+    .logo {
+        max-height: 45px;
+        min-height: 32px;
+    }
+    .theme-block {
+        width: 55px !important;
+        height: 55px !important;
+        min-width: 38px;
+        min-height: 38px;
+    }
+    .theme-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .navigation-bar {
+        height: 60px;
+        min-height: 60px;
+        max-height: 60px;
+        padding: 12px 20px;
+    }
+    .extension-logo-block {
+        min-width: 150px;
+        max-width: 180px;
+    }
+    .logo {
+        max-height: 40px;
+        min-height: 30px;
+    }
+    .theme-block {
+        width: 42px;
+        height: 42px;
+        min-width: 35px;
+        min-height: 35px;
+    }
+    .theme-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navigation-bar {
+        height: 55px;
+        min-height: 55px;
+        max-height: 55px;
+        padding: 10px 18px;
+    }
+    .extension-logo-block {
+        min-width: 140px;
+        max-width: 160px;
+    }
+    .logo {
+        max-height: 35px;
+        min-height: 28px;
+    }
+    .theme-block {
+        width: 38px;
+        height: 38px;
+        min-width: 32px;
+        min-height: 32px;
+    }
+    .theme-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+    .navigation-bar {
+        height: 50px;
+        min-height: 50px;
+        max-height: 50px;
+        padding: 10px 15px;
+    }
+    .extension-logo-block {
+        min-width: 120px;
+        max-width: 140px;
+    }
+    .logo {
+        max-height: 32px;
+        min-height: 25px;
+    }
+    .theme-block {
+        width: 34px;
+        height: 34px;
+        min-width: 30px;
+        min-height: 30px;
+        margin-left: 15px;
+    }
+    .theme-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+.extension-row-control{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0;
+    border-bottom: none;
+    gap: 15px;
+}
+.extension-text{
+    font-family: var(--main-font);
+    color: var(--text-primary);
+    font-size: 38px;
+    font-weight: bold;
+    transition: var(--theme-transition);
+}
+.filter-block {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+.filter-button{
+    color: var(--text-primary);
+    font-size: 20px;
+    font-family: var(--regular-font);
+    background-color: var(--button-background);
+    border: 1px solid var(--button-border);
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.filter-button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.filter-button:hover:before {
+    width: 150%;
+    height: 150%;
+}
+
+.filter-button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стиль для активной кнопки фильтра */
+.filter-button.active {
+    background-color: var(--button-active);
+    border-color: var(--red-700);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: var(--neutral-900);
+    transform: scale(1.05);
+}
+
+.filter-button.active:hover {
+    transform: scale(1.05) translateY(-2px);
+}
+
+.filter-button span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Стили для неактивных кнопок в светлой теме */
+.light-theme .filter-button {
+    color: var(--neutral-700);
+}
+
+/* Стили для активной кнопки в светлой теме */
+.light-theme .filter-button.active {
+    color: white;
+}
+
+
+/* Грид-система для карточек расширений */
+.extension-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+    width: 100%;
+    /* Убираем ограничение max-width и центрирование */
+}
+
+.extension-card {
+    background-color: var(--card-background);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 180px;
+    transition: all 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.extension-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    border-color: var(--button-active);
+}
+
+.extension-card:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to bottom, rgba(199, 35, 26, 0.05), transparent);
+    transition: height 0.3s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.extension-card:hover:after {
+    height: 100%;
+}
+
+.extension-card * {
+    position: relative;
+    z-index: 1;
+}
+
+.extension-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.extension-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 12px;
+    margin-right: 15px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.extension-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.extension-name {
+    font-family: var(--main-font);
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    transition: var(--theme-transition);
+}
+
+.extension-description {
+    font-family: var(--main-font);
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: var(--theme-transition);
+}
+
+.extension-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.remove-button {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-family: var(--main-font);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--card-background);
+    position: relative;
+    overflow: hidden;
+}
+
+.remove-button:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.remove-button:hover {
+    border-color: var(--red-500);
+    color: var(--red-500);
+}
+
+.remove-button:active:after {
+    opacity: 1;
+    transform: scale(2);
+}
+
+/* Стили для переключателей */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    transition: var(--theme-transition);
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--button-background);
+    border-radius: 34px;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+    background-color: var(--red-500);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+    background-color: white;
+}
+
+/* Добавляем эффект пульсации при клике на переключатель */
+.toggle-switch input:active + .slider:before {
+    width: 22px;
+    height: 22px;
+    bottom: 1px;
+    left: 2px;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s ease, height 0.2s ease, bottom 0.2s ease, left 0.2s ease;
+}
+
+/* Добавляем рябь при клике на переключатель */
+.slider:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.toggle-switch input:active + .slider:after {
+    opacity: 1;
+    transform: scale(2);
+}
+
+/* Стили для светлой темы */
+.light-theme .logo {
+    /* Фильтр для изменения белого цвета на темный (neutral-900) */
+    filter: contrast(0.5) brightness(0.6);
+}
+
+.light-theme .remove-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Настройки для 1440px */
+@media screen and (max-width: 1400px) {
+    .extension-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        width: 100%;
+        /* Убираем max-width и margin */
+    }
+    
+    .extension-card {
+        padding: 25px 30px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .extension-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        width: 100%;
+        /* Убираем max-width и margin */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .extension-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .extension-card {
+        padding: 20px;
+    }
+    
+    .extension-name {
+        font-size: 18px;
+    }
+    
+    .extension-description {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .extension-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.block-extension {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background-color: transparent;
+    border-radius: 0;
+    padding: 30px 0;
+    margin-top: 20px;
+}
+
+/* Добавляем медиа-запрос для меньших экранов */
+@media screen and (max-width: 768px) {
+    .extension-row-control {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .extension-text {
+        font-size: 28px;
+        margin-bottom: 5px;
+    }
+    
+    .filter-block {
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Дополнительная адаптация для очень маленьких экранов */
+@media screen and (max-width: 480px) {
+    .extension-text {
+        font-size: 24px;
+    }
+    
+    .filter-button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+
+/* Стили для переключения темы */
+.theme-toggle {
+    display: none; /* Скрываем эти стили, так как они не используются */
+}
