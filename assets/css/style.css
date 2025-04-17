@@ -464,11 +464,14 @@ main{
     font-weight: bold;
     transition: var(--theme-transition);
 }
+
+/* Стили для блока фильтров */
 .filter-block {
     display: flex;
     gap: 10px;
     flex-shrink: 0;
 }
+
 .filter-button{
     color: var(--text-primary);
     font-size: 20px;
@@ -820,13 +823,22 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    /* Делаем скролл невидимым */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE и Edge */
     background-color: transparent;
     border-radius: 0;
     padding: 30px 0;
     margin-top: 20px;
 }
 
-/* Добавляем медиа-запрос для меньших экранов */
+/* Скрываем скроллбар для WebKit браузеров (Chrome, Safari, Opera) */
+.block-extension::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
+/* Скрываем горизонтальный скролл в фильтрах на мобильных устройствах */
 @media screen and (max-width: 768px) {
     .extension-row-control {
         flex-direction: column;
@@ -844,6 +856,13 @@ input:checked + .slider:before {
         width: 100%;
         padding-bottom: 5px;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE и Edge */
+    }
+    
+    .filter-block::-webkit-scrollbar {
+        display: none;
+        height: 0;
     }
 }
 
