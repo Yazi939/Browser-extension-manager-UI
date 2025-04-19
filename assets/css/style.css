@@ -423,9 +423,9 @@ main{
         width: 95%;
     }
     .navigation-bar {
-        height: 50px;
+        height: 80px;
         min-height: 50px;
-        max-height: 50px;
+        max-height: 80px;
         padding: 10px 15px;
     }
     .extension-logo-block {
